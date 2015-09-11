@@ -1,0 +1,74 @@
+﻿@model shippingCodefirstTest.Models.Label
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Label</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderHistory.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderHistory.note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lb_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lb_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_updated_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_updated_time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LabelId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -4,7 +4,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+
+    enum OrderState {Created,Paid,Cancelled }
+
+
     public partial class OrderHistory {
+
         [Key]
         public int OrderId { get; set; }
 
@@ -22,6 +27,7 @@
 
         public string note { get; set; }
 
+        [Index]
         public int state { get; set; }
 
         public string payment_id { get; set; }
@@ -36,8 +42,13 @@
 
         public DateTime paid_on_time { get; set; }
 
-        [ForeignKey("AspNetUser")]
         public string user_id { get; set; }
+
+        [ForeignKey("user_id")]
+        public AspNetUser User { get; set; }
+
+        public ICollection<Label> Labels { get; set; }
+
 
     }
 } 

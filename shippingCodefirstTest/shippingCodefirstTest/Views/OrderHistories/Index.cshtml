@@ -1,0 +1,93 @@
+﻿@model IEnumerable<shippingCodefirstTest.Models.OrderHistory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_sell_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_cost_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_sell_tax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_sell_balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payment_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.last_updated_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paid_on_time)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_sell_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_cost_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_sell_tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_sell_balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.last_updated_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paid_on_time)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrderId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrderId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrderId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -14,8 +14,8 @@ namespace shippingCodefirstTest.Models {
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<OrderHistory> OrderHistory { get; set; }
-        public virtual DbSet<Labels> Labels { get; set; }
+        public virtual DbSet<OrderHistory> OrderHistories { get; set; }
+        public virtual DbSet<Label> Labels { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {

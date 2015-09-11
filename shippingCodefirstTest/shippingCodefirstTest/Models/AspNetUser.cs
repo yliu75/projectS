@@ -53,5 +53,12 @@ namespace shippingCodefirstTest.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+
+
+        //===============================================================
+        //The following is added code:
+        [Column(TypeName ="Money")]
+        public decimal Balance { get; set; }
+
     }
 }

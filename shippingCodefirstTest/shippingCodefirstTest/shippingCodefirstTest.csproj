@@ -50,16 +50,33 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -171,7 +188,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderHistoriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +214,22 @@
     <Compile Include="Migrations\201509031424207_noChange_0.Designer.cs">
       <DependentUpon>201509031424207_noChange_0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509092025008_label_orderhistory.cs" />
+    <Compile Include="Migrations\201509092025008_label_orderhistory.Designer.cs">
+      <DependentUpon>201509092025008_label_orderhistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509101527091_state_index.cs" />
+    <Compile Include="Migrations\201509101527091_state_index.Designer.cs">
+      <DependentUpon>201509101527091_state_index.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509111709226_add_balance.cs" />
+    <Compile Include="Migrations\201509111709226_add_balance.Designer.cs">
+      <DependentUpon>201509111709226_add_balance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509111710274_changeto_Balance.cs" />
+    <Compile Include="Migrations\201509111710274_changeto_Balance.Designer.cs">
+      <DependentUpon>201509111710274_changeto_Balance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs" />
@@ -202,8 +237,9 @@
     <Compile Include="Models\AspNetUserClaim.cs" />
     <Compile Include="Models\AspNetUserLogin.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\ExtUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Labels.cs" />
+    <Compile Include="Models\Label.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderHistory.cs" />
     <Compile Include="Models\UserProfileDataModel.cs" />
@@ -269,6 +305,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Labels\Create.cshtml" />
+    <Content Include="Views\Labels\Delete.cshtml" />
+    <Content Include="Views\Labels\Details.cshtml" />
+    <Content Include="Views\Labels\Edit.cshtml" />
+    <Content Include="Views\Labels\Index.cshtml" />
+    <Content Include="Views\OrderHistories\Create.cshtml" />
+    <Content Include="Views\OrderHistories\Delete.cshtml" />
+    <Content Include="Views\OrderHistories\Details.cshtml" />
+    <Content Include="Views\OrderHistories\Edit.cshtml" />
+    <Content Include="Views\OrderHistories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,6 +342,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509031424207_noChange_0.resx">
       <DependentUpon>201509031424207_noChange_0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509092025008_label_orderhistory.resx">
+      <DependentUpon>201509092025008_label_orderhistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509101527091_state_index.resx">
+      <DependentUpon>201509101527091_state_index.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509111709226_add_balance.resx">
+      <DependentUpon>201509111709226_add_balance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509111710274_changeto_Balance.resx">
+      <DependentUpon>201509111710274_changeto_Balance.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

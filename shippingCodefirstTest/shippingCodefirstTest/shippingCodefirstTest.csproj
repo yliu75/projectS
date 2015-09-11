@@ -191,6 +191,7 @@
     <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderHistoriesController.cs" />
+    <Compile Include="Controllers\UserLabelsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -315,6 +316,11 @@
     <Content Include="Views\OrderHistories\Details.cshtml" />
     <Content Include="Views\OrderHistories\Edit.cshtml" />
     <Content Include="Views\OrderHistories\Index.cshtml" />
+    <Content Include="Views\UserLabels\Create.cshtml" />
+    <Content Include="Views\UserLabels\Delete.cshtml" />
+    <Content Include="Views\UserLabels\Details.cshtml" />
+    <Content Include="Views\UserLabels\Edit.cshtml" />
+    <Content Include="Views\UserLabels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

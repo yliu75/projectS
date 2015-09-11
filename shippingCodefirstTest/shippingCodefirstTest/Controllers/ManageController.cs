@@ -64,7 +64,7 @@ namespace shippingCodefirstTest.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            
+            //var balance=AspNetUsers;
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),

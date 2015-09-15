@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<shippingCodefirstTest.Models.Label>
-
 @{
     ViewBag.Title = "Index";
 }
@@ -12,10 +11,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrderHistory.note)
+            @Html.DisplayNameFor(model => model.LabelId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderHistory.note)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ver)
@@ -38,10 +40,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.OrderHistory.note)
+            @Html.DisplayFor(modelItem => item.LabelId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.User.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderHistory.note)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ver)

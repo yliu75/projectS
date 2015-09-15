@@ -41,8 +41,8 @@ namespace shippingCodefirstTest.Controllers
         // GET: Labels/Create
         public ActionResult Create()
         {
-            ViewBag.order_id = new SelectList(db.OrderHistories, "OrderId", "note");
-            ViewBag.user_id = new SelectList(db.AspNetUsers, "Id", "Email");
+            //ViewBag.order_id = new SelectList(db.OrderHistories, "OrderId", "note");
+            //ViewBag.user_id = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -51,7 +51,7 @@ namespace shippingCodefirstTest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "LabelId,ver,lb_content,state,created_time,last_updated_time,order_id,user_id")] Label label)
+        public async Task<ActionResult> Create([Bind(Include = "LabelId,ver,lb_content,state,created_time,last_updated_time")] Label label)
         {
             if (ModelState.IsValid)
             {

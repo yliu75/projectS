@@ -12,10 +12,13 @@
 
     public enum LabelVer { s_1, s_2 }
     public class Label {
+
         [Key]
+        [Display(Name ="Label ID")]
         public int LabelId { get; set; }
 
         [Required]
+        [Display(Name ="Version")]
         public string ver { get; set; }
 
         [Column(TypeName = "xml")]
@@ -32,24 +35,28 @@
         [Index]
         public int state { get; set; }
 
-        [Required]
         //[DatabaseGenerated(DatabaseGenerationOption.Computed)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Display(Name = "Created Time")]
         public DateTime created_time { get; set; }
 
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Display(Name = "Last Updated Time")]
         public DateTime last_updated_time { get; set; }
 
+        [Display(Name ="Order ID")]
         public int order_id { get; set; }
 
         [ForeignKey("order_id")]
-        public OrderHistory OrderHistory { get; set; }
+        public virtual OrderHistory OrderHistory { get; set; }
 
+        [Display(Name ="User ID")]
         public string user_id { get; set; }
 
         [ForeignKey("user_id")]
-        public AspNetUser User { get; set; }
+        public virtual AspNetUser User { get; set; }
 
     }
 }

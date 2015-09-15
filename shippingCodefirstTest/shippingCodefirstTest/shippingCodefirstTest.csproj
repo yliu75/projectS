@@ -231,6 +231,30 @@
     <Compile Include="Migrations\201509111710274_changeto_Balance.Designer.cs">
       <DependentUpon>201509111710274_changeto_Balance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509112056450_deleteIdentity.cs" />
+    <Compile Include="Migrations\201509112056450_deleteIdentity.Designer.cs">
+      <DependentUpon>201509112056450_deleteIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509112106593_labelID.cs" />
+    <Compile Include="Migrations\201509112106593_labelID.Designer.cs">
+      <DependentUpon>201509112106593_labelID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509141443057_changeidentitytocomputed.cs" />
+    <Compile Include="Migrations\201509141443057_changeidentitytocomputed.Designer.cs">
+      <DependentUpon>201509141443057_changeidentitytocomputed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509141451497_same_as_last_one.cs" />
+    <Compile Include="Migrations\201509141451497_same_as_last_one.Designer.cs">
+      <DependentUpon>201509141451497_same_as_last_one.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509141459007_nullable_paid_on_time.cs" />
+    <Compile Include="Migrations\201509141459007_nullable_paid_on_time.Designer.cs">
+      <DependentUpon>201509141459007_nullable_paid_on_time.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509141508324_display_name_test.cs" />
+    <Compile Include="Migrations\201509141508324_display_name_test.Designer.cs">
+      <DependentUpon>201509141508324_display_name_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs" />
@@ -241,6 +265,7 @@
     <Compile Include="Models\ExtUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Label.cs" />
+    <Compile Include="Models\label_content_xml.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderHistory.cs" />
     <Compile Include="Models\UserProfileDataModel.cs" />
@@ -360,6 +385,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509111710274_changeto_Balance.resx">
       <DependentUpon>201509111710274_changeto_Balance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509112056450_deleteIdentity.resx">
+      <DependentUpon>201509112056450_deleteIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509112106593_labelID.resx">
+      <DependentUpon>201509112106593_labelID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141443057_changeidentitytocomputed.resx">
+      <DependentUpon>201509141443057_changeidentitytocomputed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141451497_same_as_last_one.resx">
+      <DependentUpon>201509141451497_same_as_last_one.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141459007_nullable_paid_on_time.resx">
+      <DependentUpon>201509141459007_nullable_paid_on_time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141508324_display_name_test.resx">
+      <DependentUpon>201509141508324_display_name_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

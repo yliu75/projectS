@@ -1,4 +1,4 @@
-﻿@model shippingCodefirstTest.Models.Label
+﻿@model shippingCodefirstTest.ViewModels.XmlViewModel
 
 @{
     ViewBag.Title="Create";
@@ -14,80 +14,172 @@
         <h4>Label</h4>
         <hr />
         @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-        <h5>Sender's Information</h5>
+        <h4>Sender's Information</h4>
         <div>
-            Name @Html.TextBox("from_name")
+            @Html.EditorFor(m => m.sender_info.from_name)
+            @Html.ValidationMessageFor(m => m.sender_info.from_name,null,new { @class = "text-danger" })
         </div>
         <div>
-            from_address_1 @Html.TextBox("from_address_1")
+            @Html.LabelFor(m => m.sender_info.from_address_1)
         </div>
         <div>
-            from_address_2 @Html.TextBox("from_address_2")
+            @Html.EditorFor(m => m.sender_info.from_address_1)
+            @Html.ValidationMessageFor(m => m.sender_info.from_address_1,null,new { @class = "text-danger" })
         </div>
         <div>
-            from_zipcode @Html.TextBox("from_zipcode")
+            @Html.LabelFor(m => m.sender_info.from_address_2)
         </div>
         <div>
-            from_email @Html.TextBox("from_email")
+            @Html.EditorFor(m => m.sender_info.from_address_2)
+            @Html.ValidationMessageFor(m => m.sender_info.from_address_2,null,new { @class = "text-danger" })
         </div>
         <div>
-            from_telephone @Html.TextBox("from_telephone")
+            @Html.LabelFor(m => m.sender_info.from_zipcode)
         </div>
         <div>
-            from_nation @Html.TextBox("from_nation")
+            @Html.EditorFor(m => m.sender_info.from_zipcode)
+            @Html.ValidationMessageFor(m => m.sender_info.from_zipcode,null,new { @class = "text-danger" })
         </div>
         <div>
-            from_city @Html.TextBox("from_city")
+            @Html.LabelFor(m => m.sender_info.from_telephone)
         </div>
         <div>
-            from_nation_state @Html.TextBox("from_nation_state")
+            @Html.EditorFor(m => m.sender_info.from_telephone)
+            @Html.ValidationMessageFor(m => m.sender_info.from_telephone,null,new { @class = "text-danger" })
         </div>
-        <h5>Receiver's Information</h5>
         <div>
-            to_name @Html.TextBox("to_name")
-        </div><div>
-            to_address_1 @Html.TextBox("to_address_1")
-        </div><div>
-            to_address_2 @Html.TextBox("to_address_2")
-        </div><div>
-            to_zipcode @Html.TextBox("to_zipcode")
-        </div><div>
-            to_email @Html.TextBox("to_email")
-        </div><div>
-            to_telephone @Html.TextBox("to_telephone")
-        </div><div>
-            to_nation @Html.TextBox("to_nation")
-        </div><div>
-            to_city @Html.TextBox("to_city")
-        </div><div>
-            to_nation_state @Html.TextBox("to_nation_state")
+            @Html.LabelFor(m => m.sender_info.from_city)
         </div>
-        <h5>Parcel Information</h5>
         <div>
-            pkg_length @Html.TextBox("pkg_length")
-        </div><div>
-            pkg_width @Html.TextBox("pkg_width")
-        </div><div>
-            pkg_height @Html.TextBox("pkg_height")
-        </div><div>
-            pkg_weight @Html.TextBox("pkg_weight")
+            @Html.EditorFor(m => m.sender_info.from_city)
+            @Html.ValidationMessageFor(m => m.sender_info.from_city,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.sender_info.from_nation_state)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.sender_info.from_nation_state)
+            @Html.ValidationMessageFor(m => m.sender_info.from_nation_state,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.sender_info.from_email)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.sender_info.from_email)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.sender_info.from_nation)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.sender_info.from_nation)
+        </div>
+        <h4>Receiver's Information</h4>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_name)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_name)
+            @Html.ValidationMessageFor(m => m.receiver_info.to_name,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_address_1)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_address_1)
+            @Html.ValidationMessageFor(m => m.receiver_info.to_address_1,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_address_2)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_address_2)
+            @Html.ValidationMessageFor(m => m.receiver_info.to_address_2,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_zipcode)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_zipcode)
+            @Html.ValidationMessageFor(m => m.receiver_info.to_zipcode,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_telephone)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_telephone)
+            @Html.ValidationMessageFor(m => m.receiver_info.to_telephone,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_city)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_city)
+            @Html.ValidationMessageFor(m => m.receiver_info.to_city,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_nation_state)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_nation_state)
+            @Html.ValidationMessageFor(m => m.receiver_info.to_nation_state,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_email)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_email)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.receiver_info.to_nation)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.receiver_info.to_nation)
+        </div>
+        <h4>Parcel Information</h4>
+        <div>
+            @Html.LabelFor(m => m.parcel_info.pkg_length)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.parcel_info.pkg_length)
+            @Html.ValidationMessageFor(m => m.parcel_info.pkg_length,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.parcel_info.pkg_width)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.parcel_info.pkg_width)
+            @Html.ValidationMessageFor(m => m.parcel_info.pkg_width,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.parcel_info.pkg_height)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.parcel_info.pkg_height)
+            @Html.ValidationMessageFor(m => m.parcel_info.pkg_height,null,new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.parcel_info.pkg_weight)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.parcel_info.pkg_weight)
+            @Html.ValidationMessageFor(m => m.parcel_info.pkg_weight,null,new { @class = "text-danger" })
         </div>@*<div>
-            pkg_insurance @Html.TextBox("pkg_insurance")
-        </div><div>
-            item_name @Html.TextBox("item_name")
-        </div><div>
-            item_description @Html.TextBox("item_description")
-        </div><div>
-            item_qty @Html.TextBox("item_qty")
-        </div><div>
-            item_weight @Html.TextBox("item_weight")
-        </div><div>
-            pick_way @Html.TextBox("pick_way")
-        </div><div>
-            ship_date @Html.TextBox("ship_date")
-        </div><div>
-            ship_purpose @Html.TextBox("ship_purpose")
-        </div>*@
+                pkg_insurance @Html.TextBox("pkg_insurance")
+            </div><div>
+                item_name @Html.TextBox("item_name")
+            </div><div>
+                item_description @Html.TextBox("item_description")
+            </div><div>
+                item_qty @Html.TextBox("item_qty")
+            </div><div>
+                item_weight @Html.TextBox("item_weight")
+            </div><div>
+                pick_way @Html.TextBox("pick_way")
+            </div><div>
+                ship_date @Html.TextBox("ship_date")
+            </div><div>
+                ship_purpose @Html.TextBox("ship_purpose")
+            </div>*@
         @*<div class="form-group">
                 @Html.LabelFor(model => model.LabelId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">

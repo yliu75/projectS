@@ -34,13 +34,13 @@
             @Html.DisplayFor(model => model.ver)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.lb_content)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.lb_content)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.state)
@@ -91,7 +91,11 @@
             </dd>
             }  
         </dl>
-      <input type="submit" value="Buy" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Purchase" class="btn btn-default" />
+        </div>
+    </div>
     </div>
 }
     <p>

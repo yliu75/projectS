@@ -21,7 +21,9 @@ namespace shippingCodefirstTest.Controllers {
             try {
                 var stringReader = new System.IO.StringReader(xmlText);
                 var serializer = new XmlSerializer(typeof(T));
-                return (T)serializer.Deserialize(stringReader);
+                string s = stringReader.ReadToEnd();
+                var sr= new System.IO.StringReader(xmlText);
+                return (T)serializer.Deserialize(sr);
             } catch {
                 throw;
             }

@@ -282,6 +282,7 @@
     <Compile Include="Models\UserProfileDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\XmlViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Context.tt" />

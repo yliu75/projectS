@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EasyPost;
 using System.Xml.Linq;
-
+using shippingCodefirstTest.ViewModels;
 namespace shippingCodefirstTest.Controllers {
 
     public class UserLabelsController:Controller {
@@ -44,22 +44,22 @@ namespace shippingCodefirstTest.Controllers {
             var label = (Label)Session["temp_lb"];
             string rateID = Request.Form["rate.rate"];
             label.lookupPrice.Buy(rateID);
-            root r = XmlHelper.Deserialize<root>(label.lb_content_xml.ToString());
+            XmlViewModel xvm = XmlHelper.Deserialize<XmlViewModel>(label.lb_content);
             string str= label.lookupPrice.tracking_code;
-            r.shipping_info.tracking_code=str;
-            r.shipping_info.shipping_label_address=label.lookupPrice.postage_label.label_url;
+            xvm.shipping_info.tracking_code=str;
+            xvm.shipping_info.shipping_label_address=label.lookupPrice.postage_label.label_url;
             Rate chosenRate = new Rate();
             foreach(Rate rate in label.lookupPrice.rates) {
                 if(rate.id==rateID) chosenRate=rate;
             }
             lb=await db.Labels.FindAsync(id);
-            lb.lb_content_xml=XDocument.Parse( XmlHelper.Serialize(r));
+            lb.lb_content=XmlHelper.Serialize(xvm);
             lb.OrderHistory.total_cost_price=Decimal.Parse(chosenRate.rate);
             db.Entry(lb).State=EntityState.Modified;
             //
             //db.Labels.Attach(lb);
             await db.SaveChangesAsync();
-            string returnUrl = r.shipping_info.shipping_label_address;
+            string returnUrl = xvm.shipping_info.shipping_label_address;
             //ViewBag.ReturnUrl=returnUrl;
             return Redirect(returnUrl); ;
         }
@@ -76,7 +76,7 @@ namespace shippingCodefirstTest.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(FormCollection f) {
+        public async Task<ActionResult> Create(XmlViewModel xvm) {
             //public async Task<ActionResult> Create([Bind(Include = "LabelId,ver,lb_content,state,created_time,last_updated_time,order_id,user_id")] Label label){
             Label label = new Label();
             //label_content_xml lb_c = new label_content_xml();
@@ -91,36 +91,37 @@ namespace shippingCodefirstTest.Controllers {
                     payment_id="123",
                     user_id=User.Identity.GetUserId()
                 };
-                label.l_xml.l=label;
-                label.l_xml.from_info.Add("from_name",Request.Form["from_name"]);
-                label.l_xml.from_info.Add("from_address_1",Request.Form["from_address_1"]);
-                label.l_xml.from_info.Add("from_address_2",Request.Form["from_address_2"]);
-                label.l_xml.from_info.Add("from_zipcode",Request.Form["from_zipcode"]);
-                label.l_xml.from_info.Add("from_email",Request.Form["from_email"]);
-                label.l_xml.from_info.Add("from_telephone",Request.Form["from_telephone"]);
-                label.l_xml.from_info.Add("from_nation",Request.Form["from_nation"]);
-                label.l_xml.from_info.Add("from_city",Request.Form["from_city"]);
-                label.l_xml.from_info.Add("from_nation_state",Request.Form["from_nation_state"]);
+                label.lb_content=XmlHelper.Serialize(xvm);
+                //label.l_xml.l=label;
+                //label.l_xml.from_info.Add("from_name",Request.Form["from_name"]);
+                //label.l_xml.from_info.Add("from_address_1",Request.Form["from_address_1"]);
+                //label.l_xml.from_info.Add("from_address_2",Request.Form["from_address_2"]);
+                //label.l_xml.from_info.Add("from_zipcode",Request.Form["from_zipcode"]);
+                //label.l_xml.from_info.Add("from_email",Request.Form["from_email"]);
+                //label.l_xml.from_info.Add("from_telephone",Request.Form["from_telephone"]);
+                //label.l_xml.from_info.Add("from_nation",Request.Form["from_nation"]);
+                //label.l_xml.from_info.Add("from_city",Request.Form["from_city"]);
+                //label.l_xml.from_info.Add("from_nation_state",Request.Form["from_nation_state"]);
 
-                label.l_xml.to_info.Add("to_name",Request.Form["to_name"]);
-                label.l_xml.to_info.Add("to_address_1",Request.Form["to_address_1"]);
-                label.l_xml.to_info.Add("to_address_2",Request.Form["to_address_2"]);
-                label.l_xml.to_info.Add("to_zipcode",Request.Form["to_zipcode"]);
-                label.l_xml.to_info.Add("to_email",Request.Form["to_email"]);
-                label.l_xml.to_info.Add("to_telephone",Request.Form["to_telephone"]);
-                label.l_xml.to_info.Add("to_nation",Request.Form["to_nation"]);
-                label.l_xml.to_info.Add("to_city",Request.Form["to_city"]);
-                label.l_xml.to_info.Add("to_nation_state",Request.Form["to_nation_state"]);
+                //label.l_xml.to_info.Add("to_name",Request.Form["to_name"]);
+                //label.l_xml.to_info.Add("to_address_1",Request.Form["to_address_1"]);
+                //label.l_xml.to_info.Add("to_address_2",Request.Form["to_address_2"]);
+                //label.l_xml.to_info.Add("to_zipcode",Request.Form["to_zipcode"]);
+                //label.l_xml.to_info.Add("to_email",Request.Form["to_email"]);
+                //label.l_xml.to_info.Add("to_telephone",Request.Form["to_telephone"]);
+                //label.l_xml.to_info.Add("to_nation",Request.Form["to_nation"]);
+                //label.l_xml.to_info.Add("to_city",Request.Form["to_city"]);
+                //label.l_xml.to_info.Add("to_nation_state",Request.Form["to_nation_state"]);
 
-                label.l_xml.parcel_info.Add("pkg_length",Request.Form["pkg_length"]);
-                label.l_xml.parcel_info.Add("pkg_width",Request.Form["pkg_width"]);
-                label.l_xml.parcel_info.Add("pkg_height",Request.Form["pkg_height"]);
-                label.l_xml.parcel_info.Add("pkg_weight",Request.Form["pkg_weight"]);
+                //label.l_xml.parcel_info.Add("pkg_length",Request.Form["pkg_length"]);
+                //label.l_xml.parcel_info.Add("pkg_width",Request.Form["pkg_width"]);
+                //label.l_xml.parcel_info.Add("pkg_height",Request.Form["pkg_height"]);
+                //label.l_xml.parcel_info.Add("pkg_weight",Request.Form["pkg_weight"]);
 
 
 
-                label.lb_content=label.l_xml.generateXml().ToString();
-                label.l_xml=label.l_xml;
+                //label.lb_content=label.l_xml.generateXml().ToString();
+                //label.l_xml=label.l_xml;
                 label.ver="s_1";
                 label.state=(int)LabelState.Created;
                 label.order_id=db.OrderHistories.Add(oh).OrderId;

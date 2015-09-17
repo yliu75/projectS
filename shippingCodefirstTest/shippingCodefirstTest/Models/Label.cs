@@ -8,7 +8,7 @@
     using System.Xml.Linq;
     using EasyPost;
     using shippingCodefirstTest.Controllers;
-
+    using shippingCodefirstTest.ViewModels;
 
     public enum LabelState { Created, HasPrice, HasAll, Finished };
 
@@ -53,7 +53,7 @@
                 EasyPost.Client.apiKey="a5we2wQDH0O8cuyafkDsNw";
                 //XDocument xml = new XDocument();
                 //xml=lb_content_xml;
-                root ep = XmlHelper.Deserialize<root>(lb_content);
+                XmlViewModel ep = XmlHelper.Deserialize<XmlViewModel>(lb_content);
                 Address fromAddress = new Address() {
                     company=ep.sender_info.from_name,
                     street1=ep.sender_info.from_address_1,

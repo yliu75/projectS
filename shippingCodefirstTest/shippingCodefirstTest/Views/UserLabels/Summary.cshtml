@@ -1,0 +1,37 @@
+﻿
+
+
+
+
+
+@model shippingCodefirstTest.Models.Label
+
+@{
+
+    ViewBag.Title="Summary";
+}
+
+<h2>Summary</h2>
+@using(Html.BeginForm("Result", "UserLabels")) {
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>Label</h4>
+        <hr />
+        @Html.DisplayForModel()
+        @Html.ViewBag.ChosenRate.rate
+        <form action="" method="POST">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+                    data-amount="@Html.ViewBag.final_price_cent"
+                    data-name="Demo Site"
+                    data-description="2 widgets ($@Html.ViewBag.ChosenRate.rate)"
+                    @*data-image="/128x128.png"*@
+                    data-locale="auto">
+            </script>
+        </form>
+    </div>    
+}
+<p>
+    @Html.ActionLink("Back to List","Index")
+</p>
+

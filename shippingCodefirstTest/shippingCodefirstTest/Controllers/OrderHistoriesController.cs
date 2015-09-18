@@ -25,6 +25,7 @@ namespace shippingCodefirstTest.Controllers
         }
 
         // GET: OrderHistories/Details/5
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)

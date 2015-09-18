@@ -358,6 +358,7 @@
     <Content Include="Views\UserLabels\Details.cshtml" />
     <Content Include="Views\UserLabels\Edit.cshtml" />
     <Content Include="Views\UserLabels\Index.cshtml" />
+    <Content Include="Views\UserLabels\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

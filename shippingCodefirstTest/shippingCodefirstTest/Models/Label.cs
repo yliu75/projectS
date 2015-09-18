@@ -19,7 +19,7 @@
 
         public Label() {
             lookupPrice=new Shipment();
-            l_xml=new label_content_xml();
+            //l_xml=new label_content_xml();
         }
 
         [Key]
@@ -39,8 +39,8 @@
             set { lb_content=value.ToString(); }
         }
 
-        [NotMapped]
-        public label_content_xml l_xml { get; set; }
+        //[NotMapped]
+        //public label_content_xml l_xml { get; set; }
 
         [NotMapped]
         private Shipment _lookupPrice;

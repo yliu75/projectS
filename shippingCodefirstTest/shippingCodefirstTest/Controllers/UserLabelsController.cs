@@ -40,12 +40,13 @@ namespace shippingCodefirstTest.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult> Details(int? id,FormCollection f) {
+        public async Task<ActionResult> Details(int? id, FormCollection f) {
             var label = (Label)Session["temp_lb"];
             string rateID = Request.Form["rate.rate"];
             label.lookupPrice.Buy(rateID);
             XmlViewModel xvm = XmlHelper.Deserialize<XmlViewModel>(label.lb_content);
             string str= label.lookupPrice.tracking_code;
+            //xvm.shipping_info=new ViewModels.shipping_info();
             xvm.shipping_info.tracking_code=str;
             xvm.shipping_info.shipping_label_address=label.lookupPrice.postage_label.label_url;
             Rate chosenRate = new Rate();
@@ -61,7 +62,26 @@ namespace shippingCodefirstTest.Controllers {
             await db.SaveChangesAsync();
             string returnUrl = xvm.shipping_info.shipping_label_address;
             //ViewBag.ReturnUrl=returnUrl;
-            return Redirect(returnUrl); ;
+            return Redirect(returnUrl);
+        }
+
+        [HttpPost]
+        public ActionResult Summary() {
+            var label = (Label)Session["temp_lb"];
+            string rateID = Request.Form["rate.rate"];
+            XmlViewModel xvm = XmlHelper.Deserialize<XmlViewModel>(label.lb_content);
+            string str = label.lookupPrice.tracking_code;
+            //xvm.shipping_info=new ViewModels.shipping_info();
+            Rate chosenRate = new Rate();
+            foreach(Rate rate in label.lookupPrice.rates) {
+                if(rate.id==rateID) {
+                    chosenRate=rate;
+                    ViewBag.ChosenRate=chosenRate;
+                    ViewBag.final_price_cent=Decimal.Parse(chosenRate.rate)*100;
+                    break;
+                }
+            }
+            return View(label);
         }
 
         // GET: UserLabels/Create
@@ -91,6 +111,7 @@ namespace shippingCodefirstTest.Controllers {
                     payment_id="123",
                     user_id=User.Identity.GetUserId()
                 };
+                //xvm.shipping_info=new ViewModels.shipping_info();
                 label.lb_content=XmlHelper.Serialize(xvm);
                 //label.l_xml.l=label;
                 //label.l_xml.from_info.Add("from_name",Request.Form["from_name"]);

@@ -5,7 +5,8 @@
 }
 
 <h2>Details</h2>
-@using(Html.BeginForm("Details")) {
+@using(Html.BeginForm("Summary", "UserLabels")) {
+    @Html.AntiForgeryToken()
 <div>
     <h4>Label</h4>
     <hr />
@@ -93,7 +94,15 @@
         </dl>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Purchase" class="btn btn-default" />
+            <input type="submit" value="Checkout" class="btn btn-default" />
+            @*<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_6prnascoboktishfeqd4xmuh"
+                    data-amount="2000"
+                    data-name="demo site"
+                    data-description="2 widgets ($20.00)"
+                    data-image="/128x128.png"
+                    data-locale="auto">
+            </script>*@
         </div>
     </div>
     </div>

@@ -6,6 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shippingCodefirstTest.ViewModels {
     public class XmlViewModel {
+        public XmlViewModel() {
+            sender_info=new sender_info();
+            receiver_info=new receiver_info();
+            parcel_info=new parcel_info();
+            shipping_info=new shipping_info();
+        }
         public sender_info sender_info { get; set; }
         public receiver_info receiver_info { get; set; }
         public parcel_info parcel_info { get; set; }

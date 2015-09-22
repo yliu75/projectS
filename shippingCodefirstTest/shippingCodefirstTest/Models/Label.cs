@@ -39,11 +39,24 @@
             set { lb_content=value.ToString(); }
         }
 
-        //[NotMapped]
-        //public label_content_xml l_xml { get; set; }
+        [NotMapped]
+        public XmlViewModel lb_obj {
+            get {
+                if (_lb_obj == null) {
+                    return XmlHelper.Deserialize<XmlViewModel>(lb_content);
+                }
+                return _lb_obj;
+            }
+        }
 
         [NotMapped]
         private Shipment _lookupPrice;
+
+        [NotMapped]
+        private XmlViewModel _lb_obj;
+
+        [NotMapped]
+        public Rate chosenRate { get; set; }
 
         [NotMapped]
         [Display(Name = "Price")]
@@ -53,8 +66,8 @@
                 EasyPost.Client.apiKey="a5we2wQDH0O8cuyafkDsNw";
                 //XDocument xml = new XDocument();
                 //xml=lb_content_xml;
-                XmlViewModel ep = XmlHelper.Deserialize<XmlViewModel>(lb_content);
-                Address fromAddress = new Address() {
+                XmlViewModel ep = lb_obj;
+                Address fromAddress=new Address() {
                     company=ep.sender_info.from_name,
                     street1=ep.sender_info.from_address_1,
                     street2=ep.sender_info.from_address_2,
@@ -99,8 +112,8 @@
                     //rateList.Add(rate.rate);
                     //System.Console.WriteLine(rate.id);
                 }
-                
-                _lookupPrice = shipment;
+
+                _lookupPrice=shipment;
                 return _lookupPrice;
             }
             set { }

@@ -12,24 +12,50 @@
 }
 
 <h2>Summary</h2>
-@using(Html.BeginForm("Result", "UserLabels")) {
+@using(Html.BeginForm("PaidInfo", "UserLabels")) {
     @Html.AntiForgeryToken()
     <div>
-        <h4>Label</h4>
+        <h4>Summary of the Order</h4>
         <hr />
-        @Html.DisplayForModel()
-        @Html.ViewBag.ChosenRate.rate
-        <form action="" method="POST">
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-                    data-amount="@Html.ViewBag.final_price_cent"
-                    data-name="Demo Site"
-                    data-description="2 widgets ($@Html.ViewBag.ChosenRate.rate)"
-                    @*data-image="/128x128.png"*@
-                    data-locale="auto">
-            </script>
-        </form>
-    </div>    
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.lb_obj.sender_info.from_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.lb_obj.sender_info.from_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.lb_obj.sender_info.from_address_1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.lb_obj.sender_info.from_address_1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.lb_obj.receiver_info.to_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.lb_obj.receiver_info.to_name)
+            </dd>
+            
+            @Html.ViewBag.ChosenRate.rate
+        </dl>
+            
+            <form action="" method="POST">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+                        data-amount="@Html.ViewBag.final_price_cent"
+                        data-name="Demo Site"
+                        data-description="2 widgets ($@Html.ViewBag.ChosenRate.rate)"
+                        @*data-image="/128x128.png"*@
+                        data-locale="auto">
+                </script>
+            </form>
+</div>    
 }
 <p>
     @Html.ActionLink("Back to List","Index")

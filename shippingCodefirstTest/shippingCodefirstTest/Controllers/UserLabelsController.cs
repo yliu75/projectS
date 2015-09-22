@@ -14,6 +14,8 @@ using Microsoft.Owin.Security;
 using EasyPost;
 using System.Xml.Linq;
 using shippingCodefirstTest.ViewModels;
+using Stripe;
+
 namespace shippingCodefirstTest.Controllers {
 
     public class UserLabelsController:Controller {
@@ -31,8 +33,8 @@ namespace shippingCodefirstTest.Controllers {
             if(id==null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            this.lb = await db.Labels.FindAsync(id);
-            Session["temp_lb"] = this.lb;
+            this.lb=await db.Labels.FindAsync(id);
+            Session["temp_lb"]=this.lb;
             if(lb==null) {
                 return HttpNotFound();
             }
@@ -40,12 +42,12 @@ namespace shippingCodefirstTest.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult> Details(int? id, FormCollection f) {
+        public async Task<ActionResult> Details(int? id,FormCollection f) {
             var label = (Label)Session["temp_lb"];
             string rateID = Request.Form["rate.rate"];
             label.lookupPrice.Buy(rateID);
             XmlViewModel xvm = XmlHelper.Deserialize<XmlViewModel>(label.lb_content);
-            string str= label.lookupPrice.tracking_code;
+            string str = label.lookupPrice.tracking_code;
             //xvm.shipping_info=new ViewModels.shipping_info();
             xvm.shipping_info.tracking_code=str;
             xvm.shipping_info.shipping_label_address=label.lookupPrice.postage_label.label_url;
@@ -67,14 +69,13 @@ namespace shippingCodefirstTest.Controllers {
 
         [HttpPost]
         public ActionResult Summary() {
-            var label = (Label)Session["temp_lb"];
+            var label = (Session["temp_lb"] as Label);
             string rateID = Request.Form["rate.rate"];
-            XmlViewModel xvm = XmlHelper.Deserialize<XmlViewModel>(label.lb_content);
-            string str = label.lookupPrice.tracking_code;
-            //xvm.shipping_info=new ViewModels.shipping_info();
             Rate chosenRate = new Rate();
+
             foreach(Rate rate in label.lookupPrice.rates) {
                 if(rate.id==rateID) {
+                    label.chosenRate=rate;
                     chosenRate=rate;
                     ViewBag.ChosenRate=chosenRate;
                     ViewBag.final_price_cent=Decimal.Parse(chosenRate.rate)*100;
@@ -82,6 +83,28 @@ namespace shippingCodefirstTest.Controllers {
                 }
             }
             return View(label);
+        }
+
+        public ActionResult PaidInfo(FormCollection f) {
+            //chosen Rate p: resubmit, old form
+            //charge the money from the token
+            // charge from the bal//wrong goto payment
+            //buy the label
+            //if wrong return the money
+            //save label info
+            //return index
+            var label = Session["temp_lb"] as Label;
+            var label_charge = new StripeChargeCreateOptions() {
+                Amount=Decimal.ToInt32(Decimal.Parse(label.chosenRate.rate)*100),
+                Currency="usd",
+                Source=new StripeSourceOptions {
+                    TokenId=Request.Form["stripeToken"]
+                }
+            };
+            var chargeService = new StripeChargeService();
+            var stripeCharge = chargeService.Create(label_charge);
+      
+            return Content(f.ToString());
         }
 
         // GET: UserLabels/Create

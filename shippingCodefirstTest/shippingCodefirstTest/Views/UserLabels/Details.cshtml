@@ -12,27 +12,43 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.OrderHistory.note)
+            @Html.DisplayNameFor(model => model.lb_obj.sender_info.from_name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OrderHistory.note)
+            @Html.DisplayFor(model => model.lb_obj.sender_info.from_name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
+            @Html.DisplayNameFor(model => model.lb_obj.sender_info.from_address_1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User.Email)
+            @Html.DisplayFor(model => model.lb_obj.sender_info.from_address_1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ver)
+            @Html.DisplayNameFor(model => model.lb_obj.receiver_info.to_name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ver)
+            @Html.DisplayFor(model => model.lb_obj.receiver_info.to_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lb_obj.receiver_info.to_address_1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lb_obj.receiver_info.to_address_1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lb_obj.parcel_info.pkg_weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lb_obj.parcel_info.pkg_weight)
         </dd>
 
         @*<dt>

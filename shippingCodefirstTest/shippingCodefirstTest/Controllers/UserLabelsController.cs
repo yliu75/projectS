@@ -18,7 +18,7 @@ using Stripe;
 using System.Configuration;
 
 namespace shippingCodefirstTest.Controllers {
-
+    [Authorize]
     public class UserLabelsController:Controller {
         private UserProfileDataModel db = new UserProfileDataModel();
         private Label lb;

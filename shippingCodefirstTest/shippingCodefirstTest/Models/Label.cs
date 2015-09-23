@@ -43,10 +43,12 @@
         public XmlViewModel lb_obj {
             get {
                 if (_lb_obj == null) {
-                    return XmlHelper.Deserialize<XmlViewModel>(lb_content);
+                    _lb_obj=XmlHelper.Deserialize<XmlViewModel>(lb_content);
+                    //return XmlHelper.Deserialize<XmlViewModel>(lb_content);
                 }
                 return _lb_obj;
             }
+
         }
 
         [NotMapped]

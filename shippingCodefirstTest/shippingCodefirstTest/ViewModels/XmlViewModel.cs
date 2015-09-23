@@ -26,7 +26,6 @@ namespace shippingCodefirstTest.ViewModels {
         [Required]
         [Display(Name = "Sender's address 1")]
         public string from_address_1 { get; set; }
-        [Required]
         [Display(Name = "Sender's address 2")]
         public string from_address_2 { get; set; }
         [Required]
@@ -54,7 +53,6 @@ namespace shippingCodefirstTest.ViewModels {
         [Required]
         [Display(Name = "Receiver's address 1")]
         public string to_address_1 { get; set; }
-        [Required]
         [Display(Name = "Receiver's address 2")]
         public string to_address_2 { get; set; }
         [Required]
@@ -81,7 +79,7 @@ namespace shippingCodefirstTest.ViewModels {
         public string pkg_weight { get; set; }
     }
     public class shipping_info {
-        public string tracking_code { get; set; } = "0";
-        public string shipping_label_address { get; set; } = "0";
+        public string tracking_code { get; set; } = "";
+        public string shipping_label_address { get; set; } = "";
     }
 }

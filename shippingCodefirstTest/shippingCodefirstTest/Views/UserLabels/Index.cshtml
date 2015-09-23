@@ -4,61 +4,87 @@
     ViewBag.Title="Index";
 }
 
-<h2>Index</h2>
+<h2>My Labels</h2>
+        <div class="col-lg-2">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Sidebar</li>
+                    <li class="active"><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="nav-header">Sidebar</li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="nav-header">Sidebar</li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="">
+                <p>
+                    @Html.ActionLink("Create New","Create",null,new { @class = "btn btn-primary" })
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LabelId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lb_obj.sender_info.from_name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lb_obj.receiver_info.to_name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.created_time)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.last_updated_time)
+                        </th>
+                        <th></th>
+                    </tr>
 
-<p>
-    @Html.ActionLink("Create New","Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LabelId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lb_obj.sender_info.from_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lb_obj.receiver_info.to_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_time)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.last_updated_time)
-        </th>
-        <th></th>
-    </tr>
+                    @foreach(var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LabelId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.lb_obj.sender_info.from_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.lb_obj.receiver_info.to_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.created_time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.last_updated_time)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details","Details",new { id = item.LabelId })
+                                @if(item.lb_obj.shipping_info.shipping_label_address.Length>5) {
+                                    @Html.ActionLink("| Print Label","PrintLabel",new { id = item.LabelId },new { target = "_blank" })
+                                }
+                            </td>
+                        </tr>
+                    }
 
-    @foreach(var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LabelId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lb_obj.sender_info.from_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lb_obj.receiver_info.to_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.created_time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.last_updated_time)
-            </td>
-            <td>
-                @Html.ActionLink("Details","Details",new { id = item.LabelId })
-                @if(item.lb_obj.shipping_info.shipping_label_address.Length>5) {
-                    @Html.ActionLink("| Print Label","PrintLabel",new { id = item.LabelId })
-                }
-            </td>
-        </tr>
-    }
+                </table>
+            </div>
+        </div>
 
-</table>

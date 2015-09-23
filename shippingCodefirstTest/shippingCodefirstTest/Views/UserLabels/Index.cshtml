@@ -1,30 +1,27 @@
 ﻿@model IEnumerable<shippingCodefirstTest.Models.Label>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title="Index";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New","Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrderHistory.note)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ver)
+            @Html.DisplayNameFor(model => model.LabelId)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.lb_content)
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.state)
+            @Html.DisplayNameFor(model => model.lb_obj.sender_info.from_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lb_obj.receiver_info.to_name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.created_time)
@@ -35,35 +32,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderHistory.note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ver)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.lb_content)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.state)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.last_updated_time)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.LabelId }) |*@
-            @Html.ActionLink("Details", "Details", new { id=item.LabelId }) 
-            @*@Html.ActionLink("Delete", "Delete", new { id=item.LabelId })*@
-        </td>
-    </tr>
-}
+    @foreach(var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LabelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lb_obj.sender_info.from_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lb_obj.receiver_info.to_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.created_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_updated_time)
+            </td>
+            <td>
+                @Html.ActionLink("Details","Details",new { id = item.LabelId })
+                @if(item.lb_obj.shipping_info.shipping_label_address.Length>5) {
+                    @Html.ActionLink("| Print Label","PrintLabel",new { id = item.LabelId })
+                }
+            </td>
+        </tr>
+    }
 
 </table>

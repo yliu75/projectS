@@ -15,6 +15,7 @@ using EasyPost;
 using System.Xml.Linq;
 using shippingCodefirstTest.ViewModels;
 using Stripe;
+using System.Configuration;
 
 namespace shippingCodefirstTest.Controllers {
 
@@ -47,9 +48,8 @@ namespace shippingCodefirstTest.Controllers {
             string rateID = Request.Form["rate.rate"];
             label.lookupPrice.Buy(rateID);
             XmlViewModel xvm = XmlHelper.Deserialize<XmlViewModel>(label.lb_content);
-            string str = label.lookupPrice.tracking_code;
             //xvm.shipping_info=new ViewModels.shipping_info();
-            xvm.shipping_info.tracking_code=str;
+            xvm.shipping_info.tracking_code=label.lookupPrice.tracking_code; 
             xvm.shipping_info.shipping_label_address=label.lookupPrice.postage_label.label_url;
             Rate chosenRate = new Rate();
             foreach(Rate rate in label.lookupPrice.rates) {
@@ -85,7 +85,7 @@ namespace shippingCodefirstTest.Controllers {
             return View(label);
         }
 
-        public ActionResult PaidInfo(FormCollection f) {
+        public async Task<ActionResult> PaidInfo(FormCollection f) {
             //chosen Rate p: resubmit, old form
             //charge the money from the token
             // charge from the bal//wrong goto payment
@@ -94,17 +94,37 @@ namespace shippingCodefirstTest.Controllers {
             //save label info
             //return index
             var label = Session["temp_lb"] as Label;
+            //var myToken = new StripeTokenCreateOptions();
             var label_charge = new StripeChargeCreateOptions() {
                 Amount=Decimal.ToInt32(Decimal.Parse(label.chosenRate.rate)*100),
                 Currency="usd",
                 Source=new StripeSourceOptions {
+                    //TokenId=
                     TokenId=Request.Form["stripeToken"]
                 }
+                
             };
+            //var requestOptions = new StripeRequestOptions();
+            //requestOptions.ApiKey="sk_test_2B7FGWX2f9zv1jTnlL4wtlIC";
+            //var planService = new StripePlanService("sk_test_2B7FGWX2f9zv1jTnlL4wtlIC");
             var chargeService = new StripeChargeService();
+            chargeService.ApiKey=ConfigurationManager.AppSettings["StripeApiKey"];
             var stripeCharge = chargeService.Create(label_charge);
-      
-            return Content(f.ToString());
+            if(stripeCharge.Status=="succeeded") {
+                label.lookupPrice.Buy(label.chosenRate.id);
+                label.lb_obj.shipping_info.tracking_code=label.lookupPrice.tracking_code;
+                label.lb_obj.shipping_info.shipping_label_address=label.lookupPrice.postage_label.label_url;
+
+                //lb=await db.Labels.FindAsync(id);
+                db.Labels.Attach(label);
+                label.lb_content=XmlHelper.Serialize(label.lb_obj);
+                label.OrderHistory.total_cost_price=Convert.ToDecimal(stripeCharge.Amount/100.0);
+                db.Entry(label).State=EntityState.Modified;
+                //
+                //db.Labels.Attach(lb);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: UserLabels/Create
@@ -114,6 +134,10 @@ namespace shippingCodefirstTest.Controllers {
             return View();
         }
 
+        public async Task<ActionResult> PrintLabel(int? id) {
+            Label label= await db.Labels.FindAsync(id);
+            return Redirect(label.lb_obj.shipping_info.shipping_label_address);
+        }
         // POST: UserLabels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

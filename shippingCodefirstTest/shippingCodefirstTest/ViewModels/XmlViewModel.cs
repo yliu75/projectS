@@ -21,18 +21,25 @@ namespace shippingCodefirstTest.ViewModels {
 
     public class sender_info {
         [Required]
+        [Display(Name ="Sender")]
         public string from_name { get; set; }
         [Required]
+        [Display(Name = "Sender's address 1")]
         public string from_address_1 { get; set; }
         [Required]
+        [Display(Name = "Sender's address 2")]
         public string from_address_2 { get; set; }
         [Required]
+        [Display(Name = "Sender's city")]
         public string from_city { get; set; }
         [Required]
+        [Display(Name = "Sender's state")]
         public string from_nation_state { get; set; }
         [Required]
+        [Display(Name = "Sender's zipcode")]
         public string from_zipcode { get; set; }
         [Required]
+        [Display(Name = "Sender's telephone")]
         public string from_telephone { get; set; }
         
         public string from_email { get; set; }
@@ -41,11 +48,14 @@ namespace shippingCodefirstTest.ViewModels {
     }
     public class receiver_info {
         [Required]
+        [Display(Name = "Receiver")]
         public string to_name { get; set; }
         //public string to_name { get; set; }
         [Required]
+        [Display(Name = "Receiver's address 1")]
         public string to_address_1 { get; set; }
         [Required]
+        [Display(Name = "Receiver's address 2")]
         public string to_address_2 { get; set; }
         [Required]
         public string to_city { get; set; }
